@@ -130,10 +130,16 @@ def main():
                 pass
 
             with st.expander("Girdi Özeti"):
-                # DataFrame'i daha temiz göster
-                display_df = X.T.rename(columns={0: "Değer"})
-                display_df.index.name = "Özellik"
-                st.dataframe(display_df, use_container_width=True)
+                # Basit tablo gösterimi (Arrow sorunlarını önler)
+                st.write("**Girilen Değerler:**")
+                
+                # Her özellik için ayrı ayrı göster
+                for col in X.columns:
+                    value = X[col].iloc[0]
+                    st.write(f"**{col}:** {value}")
+                
+                # Alternatif: Basit DataFrame (eğer yukarıdaki çalışmazsa)
+                # st.dataframe(X, use_container_width=True)
 
         except Exception as e:
             st.error("Tahmin sırasında bir hata oluştu. Ayrıntı için aşağıya bakın.")
