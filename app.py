@@ -130,7 +130,10 @@ def main():
                 pass
 
             with st.expander("Girdi Özeti"):
-                st.dataframe(X.T.rename(columns={0: "değer"}))
+                # DataFrame'i daha temiz göster
+                display_df = X.T.rename(columns={0: "Değer"})
+                display_df.index.name = "Özellik"
+                st.dataframe(display_df, use_container_width=True)
 
         except Exception as e:
             st.error("Tahmin sırasında bir hata oluştu. Ayrıntı için aşağıya bakın.")
